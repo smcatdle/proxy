@@ -1,0 +1,18 @@
+#!/bin/sh
+
+jar_path="../temp/WEB-INF/lib"
+
+#---------------------------------#
+# Concatanate the classpath       #
+#---------------------------------#
+for jarfile in "$jar_path"/*.jar ; do
+        if [ -z "$JAVA_CLASSPATH" ] ; then
+                JAVA_CLASSPATH="$jarfile"
+        else   
+                JAVA_CLASSPATH="$jarfile:$JAVA_CLASSPATH"
+        fi
+done
+
+echo $JAVA_CLASSPATH
+
+java -cp $JAVA_CLASSPATH:../proxy-server/target/proxy-server-0.0.1-SNAPSHOT.jar:../proxy-server/src/main/resources com.sample.server.proxy.ProxyServerMain

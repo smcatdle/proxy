@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:oxm="http://www.springframework.org/schema/oxm"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+http://www.springframework.org/schema/oxm
+http://www.springframework.org/schema/oxm/spring-oxm-3.0.xsd">
+
+
+<bean id="proxyServer" class="com.sample.server.proxy.SimpleProxyServer">
+	<property name="threadPoolSize" value="10"/>
+	<property name="maxBufferSize" value="1024"/>
+	<property name="localPort" value="2000"/>
+	<property name="serverPort" value="8080"/>
+	<property name="serverHost" value="localhost"/>
+	<property name="clientSOTimeout" value="20000"/>
+	<property name="serverSOTimeout" value="20000"/>
+	<property name="authentication" value="false"/>
+	<!--<property name="authenticationHandler" ref="authenticationHandler"/>  -->
+	<property name="workerThreadFactory" ref="workerThreadFactory"/>
+	<property name="blackList">
+		<list>
+			<value>192.189.9.1</value>
+			<value>197.9.1.3</value>
+			<value>198.0.9.1</value>
+			<value>194.23.45.1</value>
+			<value>192.78.21.34</value>									
+		</list>
+	</property>
+		<property name="whiteList">
+		<list>
+			<value>127.0.0.1</value>
+		</list>
+	</property>
+</bean>
+
+<bean id="workerThreadFactory" class="com.sample.server.proxy.thread.SimpleWorkerThreadFactory">
+</bean>
+
+<!--<bean id="authenticationHandler" class="com.company.auth.AuthenticationHandler">
+</bean>  -->
+
+</beans>
